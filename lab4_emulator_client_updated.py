@@ -16,7 +16,7 @@ data_path = "vehicle{}.csv"
 
 #Path to your certificates, modify this
 certificate_formatter = "./device_{}.certificate.pem"
-key_formatter = "./device_{}.private.pem"
+key_formatter = "./device_{}.private.pem.key"
 
 
 class MQTTClient:

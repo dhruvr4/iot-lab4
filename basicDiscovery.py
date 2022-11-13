@@ -13,7 +13,7 @@
 # * permissions and limitations under the License.
 # */
 
-
+import pandas as pd
 import os
 import sys
 import time
@@ -176,11 +176,17 @@ if args.mode == 'both' or args.mode == 'subscribe':
 time.sleep(2)
 
 loopCount = 0
+
+csv_name = 'vehicle'+topic[-1]+'.csv'
+
+df = pd.read_csv(csv_name)
+
 while True:
     if args.mode == 'both' or args.mode == 'publish':
         message = {}
-        message['message'] = args.message
+        message['message'] = df['vehicle_CO2'][loopCount]
         message['sequence'] = loopCount
+        message['car_number'] = topic[-1]
         messageJson = json.dumps(message)
         myAWSIoTMQTTClient.publish(topic, messageJson, 0)
         if args.mode == 'publish':
